@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   provider: ^6.0.3
   persistent_bottom_nav_bar: ^4.0.2
+  auto_size_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +74,9 @@ flutter:
       - assets/setting.png
       - assets/prof2.jpg
       - assets/prof1.jpg
+      - assets/camera2.png
+      - assets/feed1.jpg
+      
 
 
       

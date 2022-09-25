@@ -1,9 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uiforlwearing/services/providers.dart';
-import 'homepage.dart';
-
 
 class ActivityPage extends StatefulWidget {
   const ActivityPage({Key? key, required this.title}) : super(key: key);
@@ -17,22 +14,18 @@ class ActivityPage extends StatefulWidget {
 class _MyHomePageState extends State<ActivityPage> {
   @override
   Widget build(BuildContext context) {
-        final thecolor=Provider.of<DarkModeMOdel>(context).color;
+    final thecolor = Provider.of<DarkModeMOdel>(context).color;
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: thecolor ,
-        
+        backgroundColor: thecolor,
         appBar: AppBar(
-      shadowColor: Colors.white,
-          leading:  IconButton(icon:Icon(Icons.arrow_back), color: Colors.black,onPressed: (){
-          Navigator.pop(context);
-          },),
+          shadowColor: Colors.white,
           backgroundColor: Colors.white,
-          centerTitle: true,
           title: const Text(
             "Activity",
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(
+                color: Colors.black, fontSize: 22, fontWeight: FontWeight.bold),
           ),
         ),
         body: Padding(
@@ -42,8 +35,13 @@ class _MyHomePageState extends State<ActivityPage> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("NEW",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500),),
+                const Text(
+                  "NEW",
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+                ),
                 SizedBox(
+                  height: MediaQuery.of(context).size.height / 2,
+                  width: MediaQuery.of(context).size.width,
                   child: ListView.builder(
                       itemCount: 15,
                       itemBuilder: (BuildContext context, int index) {
@@ -63,19 +61,20 @@ class _MyHomePageState extends State<ActivityPage> {
                             ),
                             trailing: const Text(
                               "1Hr",
-                              style: TextStyle(color: Colors.green, fontSize: 15),
+                              style:
+                                  TextStyle(color: Colors.green, fontSize: 15),
                             ),
-                            title: Text(
+                            title: const Text(
                               "3 new Followers for you",
                               style: TextStyle(fontSize: 12),
                             ));
                       }),
-                  height: MediaQuery.of(context).size.height / 2,
-                  width: MediaQuery.of(context).size.width,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom:10.0,top: 10),
-                  child: Text("EARLIER",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600)),
+                const Padding(
+                  padding: EdgeInsets.only(bottom: 10.0, top: 10),
+                  child: Text("EARLIER",
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
                 ),
                 SingleChildScrollView(
                   child: SizedBox(
@@ -100,9 +99,10 @@ class _MyHomePageState extends State<ActivityPage> {
                             ),
                             trailing: const Text(
                               "1D",
-                              style: TextStyle(color: Colors.green, fontSize: 15),
+                              style:
+                                  TextStyle(color: Colors.green, fontSize: 15),
                             ),
-                            subtitle: Text(
+                            subtitle: const Text(
                                 "Paster,joshva,carlons started following you"),
                           );
                         }),

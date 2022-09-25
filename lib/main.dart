@@ -8,7 +8,6 @@ import 'package:uiforlwearing/services/providers.dart';
 import 'package:uiforlwearing/view/homepage.dart';
 
 import 'view/activitypage.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'view/searchpage.dart';
@@ -26,13 +25,11 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
         create: ((context) => DarkModeMOdel()),
         child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
-          home: MyHomePage(title: "null")
-        ));
+            debugShowCheckedModeBanner: false,
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+            ),
+            home: const MyHomePage(title: "null")));
   }
 }
-

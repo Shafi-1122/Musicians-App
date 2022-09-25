@@ -1,7 +1,9 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:uiforlwearing/services/providers.dart';
+import 'package:uiforlwearing/view/profile.dart';
 
 import 'package:uiforlwearing/view/searchpage.dart';
 
@@ -17,393 +19,323 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
-  // final _controller=PersistentTabController();
-  // List<Widget> screens=[MyHomePage1(title: "null"),MyHomePage2(title: "null")];
-// @override
-// void initState() {
-//     // TODO: implement initState
-//     super.initState();
-//         WidgetsBinding.instance.addPostFrameCallback();
-
-//   }
   @override
   Widget build(BuildContext context) {
-    var thecolor = Provider.of<DarkModeMOdel>(context).color;
-    TabController _tabController = TabController(length: 2, vsync: this);
+    var theicon = const Icon(Icons.thumb_up);
+    final con = TabController(vsync: this, length: 4);
     return SafeArea(
       child: Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: FloatingActionButton(onPressed: (){
-    
-    
-        },child: Icon(Icons.add),backgroundColor: Colors.pinkAccent,),
-       
-        backgroundColor: thecolor,
-        bottomNavigationBar:Padding(
-          padding:  EdgeInsets.only(left:23,right: 23,bottom: 8),
-          child: Row(
-         
-            children:  [  SizedBox(
-                          height: 29,
-                          width: 29,
-                          child: Image(
-                            image: AssetImage('assets/hut.png'),
-                            fit: BoxFit.fill,
-                          )),  Padding(
-                            padding: EdgeInsets.only(left:63,right:15),
-                            child: SizedBox(
-                        height: 29,
-                        width: 29,
-                        child: GestureDetector(
-                          onTap: () {
-                            
-      Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => SearchPage(title: "null")),
-      );
-    
-                          },
-                          child: Image(
-                              image: AssetImage('assets/search.png'),
-                              fit: BoxFit.fill,
-                          ),
-                        )),
-                          ),
-                          Spacer(),
-                        Padding(
-                          padding: EdgeInsets.only(right:63,left: 15),
-                          child: GestureDetector(
-                            onTap: () {
-                               Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => ActivityPage(title: "null")),
-      );
-                            },
-                            child: SizedBox(
-                            height: 31,
-                            width: 31,
-                            child: Image(
-                              image: AssetImage('assets/activity(1).png'),
-                              fit: BoxFit.fill,
-                            )),
-                          ),
-                        ),
-                        SizedBox(
-                        height: 29,
-                        width: 29,
-                        child: Image(
-                          image: AssetImage('assets/profile.png'),
-                          fit: BoxFit.fill,
-                        ))
-                        
-                        
-                        ],),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(19.0),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    const Text(
-                      "Profile",
-                      style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                    ),
-               
-               
-                   const Spacer(),
-                    
-     Consumer<DarkModeMOdel>(builder: (context, themode, child) {
-                        return IconButton(
-                          color: Colors.greenAccent,
-                          iconSize: 25,
-                            onPressed: () {
-                                 themode.toggleDarkmode();
-                              themode.darkmodechangestatus();
-                           
-                            },
-                           icon: themode.mode);
-                      }),
-    
-                    SizedBox(
-                        height: 33,
-                        width: 33,
-                        child: Image(
-                          image: AssetImage('assets/setting.png'),
-                          fit: BoxFit.fill,
-                        ))
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 22.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage(
-                              'assets/prof4.jpg',
-                            ),
-                            fit: BoxFit.fill),
-                        borderRadius: BorderRadius.circular(80),
-                       ),
-                    height: 90,
-                    width: 90,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: SizedBox(
-                      height: 40,
-                      width: MediaQuery.of(context).size.width,
-                      child: Row(
-                        children: [
-                          Column(
-                            children: const [
-                              Text("Thomas Jake",
-                                  style: TextStyle(
-                                      fontSize: 18, fontWeight: FontWeight.bold)),
-                              Padding(
-                                padding: EdgeInsets.only(top: 2.0, right: 18),
-                                child: Text(
-                                  "@jake-thomas12345",
-                                  style: TextStyle(fontSize: 8),
-                                ),
-                              )
-                            ],
-                          ),
-                          Spacer(),
-                          ElevatedButton(
-                            style:  ElevatedButton.styleFrom(
-                              primary:Colors.white,
-            side: BorderSide(
-              width: 2.0,
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.only(bottom: 20.0),
+          child: FloatingActionButton(
+            onPressed: () {},
+            backgroundColor: const Color.fromARGB(255, 243, 219, 1),
+            child: const Icon(
+              Icons.add,
               color: Colors.black,
             ),
           ),
-                              // ButtonStyle(
-                              //   side: 
-                              //   // backgroundColor:
-                              //   //     MaterialStateProperty.all(Colors.transparent),
-                              // ),
-                              onPressed: () {},
-                              child: Center(
-                                child: Text(
-                                  'Edit profile',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              )),
-                          Icon(Icons.more_vert)
-                        ],
-                      )),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
-                  child: Row(
+        ),
+        body: TabBarView(controller: con, children: [
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
-                      Padding(
-                        padding: EdgeInsets.only(right: 3.0),
-                        child: Text(
-                          "873K",
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
-                        ),
+                      Text(
+                        "Mucia",
+                        style: TextStyle(
+                            fontSize: 35, fontWeight: FontWeight.bold),
                       ),
-                      Text("Followers"),
-                      Padding(
-                        padding: EdgeInsets.only(left: 8, right: 3),
-                        child: Text(
-                          "640",
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      Text("Following")
+                      SizedBox(
+                          height: 33,
+                          width: 33,
+                          child: Image(image: AssetImage('camera2.png')))
                     ],
                   ),
-                ),
-                const Divider(
-                  color: Colors.black,
-                  thickness: 1,
-                ),
-                const Text(
-                  "All Speaker who wants to get paid please follow me for follow back.bullet lover",
-                  style: TextStyle(fontSize: 10),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 13.0),
-                  child: Row(
-                    children: [
-                      const Text("Follow me on :"),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
-                        child: SizedBox(
-                            height: 21.8,
-                            width: 21.8,
-                            child: Image.asset(
-                              'assets/twitter2.png',
-                              fit: BoxFit.fill,
-                            )),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
-                        child: SizedBox(
-                            height: 25,
-                            width: 25,
-                            child: Image.asset(
-                              'assets/instagram2.png',
-                              fit: BoxFit.fill,
-                            )),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top:25.0),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: 40,
-                    child: TabBar(
-                      indicator: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                          8.0,
-                        ),
-                        color: Color.fromARGB(255, 243, 219, 1),
-                      ),
-                      labelColor: Colors.white,
-                      tabs: const [
-                        Tab(
-                          child: Text(
-                            "Posted audios",
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        ),
-                        Tab(
-                          child: Text(
-                            "Playlist",
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        )
-                      ],
-                      controller: _tabController,
+                  const Padding(
+                    padding: EdgeInsets.only(top: 8.0),
+                    child: Text(
+                      "Stories",
+                      style:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top:12.0),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height ,
-                    child: TabBarView(controller: _tabController, children: [
-                      SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                             width: MediaQuery.of(context).size.width,
-                                      height: MediaQuery.of(context).size.height/4,
-                              child: ListView.builder(
-                                // physics: const NeverScrollableScrollPhysics(),
-                                  itemCount: 5,
-                                  itemBuilder: (BuildContext context, int index) {
-                                    return ListTile(
-                                      leading: Container(
-                                        // color: Colors.black,
-                                        width: 35,
-                                        height: 35,
-                                        decoration: const BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.all(Radius.circular(6)),
-                                          image: DecorationImage(
-                                            fit: BoxFit.fill,
-                                            image: AssetImage("assets/prof2.jpg"),
-                                          ),
-                                        ),
-                                      ),
-                                      trailing: Icon(
-                                        Icons.more_horiz,
-                                        color: Colors.black,
-                                      ),
-                                      title: Text("Faded"),
-                                      subtitle: Text("Alan Walker"),
-                                    );
-                                  }),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 18.0),
+                      child: Row(
+                        children: [
+                          Stack(alignment: Alignment.bottomLeft, children: [
+                            Container(
+                              height: 160,
+                              width: 110,
+                              decoration: BoxDecoration(
+                                  image: const DecorationImage(
+                                      image: AssetImage('prof4.jpg'),
+                                      fit: BoxFit.cover),
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Colors.green),
                             ),
-                      Padding(
-                        padding: const EdgeInsets.only(top:12,bottom: 12),
-                        child: Text("Yesterday",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 19),),
-                      ),
-                      
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width,
-                                      height: MediaQuery.of(context).size.height/4 ,
-                              child: ListView.builder(
-                                 physics: NeverScrollableScrollPhysics(),
-                                    itemCount: 3,
-                                    itemBuilder: (BuildContext context, int index) {
-                                      return ListTile(
-                                        leading: Container(
-                                          // color: Colors.black,
-                                          width: 35,
-                                          height: 35,
-                                          decoration: const BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.all(Radius.circular(6)),
-                                            image: DecorationImage(
-                                              fit: BoxFit.fill,
-                                              image: AssetImage("assets/prof2.jpg"),
-                                            ),
-                                          ),
-                                        ),
-                                        trailing: Icon(
-                                          Icons.more_horiz,
-                                          color: Colors.black,
-                                        ),
-                                        title: Text("Faded"),
-                                        subtitle: Text("Alan Walker"),
-                                      );
-                                    }),
-                            )
-                          ],
-                        ),
-                      ),
-                      ListView.builder(
-                          itemCount: 10,
-                          itemBuilder: (BuildContext context, int index) {
-                            return ListTile(
-                                leading: Container(
-                                  // color: Colors.black,
-                                  width: 35,
-                                  height: 35,
-                                  decoration: const BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    image: DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: AssetImage("assets/prof1.jpg"),
+                            const Padding(
+                              padding: EdgeInsets.all(12.0),
+                              child: Text(
+                                "Sushant",
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w300,
+                                    color: Colors.white),
+                              ),
+                            ),
+                          ]),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15.0),
+                            child: Stack(
+                                alignment: Alignment.bottomLeft,
+                                children: [
+                                  Container(
+                                    height: 160,
+                                    width: 110,
+                                    decoration: BoxDecoration(
+                                        image: const DecorationImage(
+                                            image: AssetImage('prof2.jpg'),
+                                            fit: BoxFit.cover),
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: Colors.green),
+                                  ),
+                                  const Padding(
+                                    padding: EdgeInsets.all(12.0),
+                                    child: Text(
+                                      "Alia Bhatt",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white),
                                     ),
                                   ),
+                                ]),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15.0),
+                            child: Stack(
+                                alignment: Alignment.bottomLeft,
+                                children: [
+                                  Container(
+                                    height: 160,
+                                    width: 110,
+                                    decoration: BoxDecoration(
+                                        image: const DecorationImage(
+                                            image: AssetImage('prof1.jpg'),
+                                            fit: BoxFit.cover),
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: Colors.green),
+                                  ),
+                                  const Padding(
+                                    padding: EdgeInsets.all(12.0),
+                                    child: Text(
+                                      "Pooja",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+                                ]),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15.0),
+                            child: Stack(children: [
+                              Stack(alignment: Alignment.bottomLeft, children: [
+                                Container(
+                                  height: 160,
+                                  width: 110,
+                                  decoration: BoxDecoration(
+                                      image: const DecorationImage(
+                                          image: AssetImage('prof2.jpg'),
+                                          fit: BoxFit.cover),
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: Colors.green),
                                 ),
-                                trailing: Icon(
-                                  Icons.more_horiz,
-                                  color: Colors.black,
+                                const Padding(
+                                  padding: EdgeInsets.all(12.0),
+                                  child: Text(
+                                    "Sradha Kapoor",
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w300,
+                                        color: Colors.white),
+                                  ),
                                 ),
-                                title: Text("Closer"),
-                                subtitle: Text('Chain Smokers'),);
-                          }),
-                    ]),
+                              ]),
+                            ]),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                )
-              ],
+                  const Padding(
+                    padding: EdgeInsets.only(top: 12.0),
+                    child: Text(
+                      "Feed",
+                      style:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate:
+                            const SliverGridDelegateWithMaxCrossAxisExtent(
+                                maxCrossAxisExtent: 500,
+                                childAspectRatio: 3 / 2,
+                                crossAxisSpacing: 5,
+                                mainAxisSpacing: 5),
+                        itemCount: 5,
+                        itemBuilder: (BuildContext ctx, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                                height: MediaQuery.of(context).size.height / 3,
+                                width: MediaQuery.of(context).size.height / 2.5,
+                                decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.shade300,
+                                        blurRadius: 20.0,
+                                        spreadRadius: 2.0,
+                                      ),
+                                    ],
+                                    color: Colors.white,
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(18))),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(7),
+                                              color: Colors.white,
+                                              image: const DecorationImage(
+                                                fit: BoxFit.fill,
+                                                image: AssetImage('feed1.jpg'),
+                                              ),
+                                            ),
+                                            height: 120,
+                                            width: 100,
+                                          ),
+                                          const Spacer(),
+                                          SizedBox(
+                                            child: Column(
+                                              children: [
+                                                const Text(
+                                                  'Isai Aruvi',
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.w800),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 13.0),
+                                                  child: theicon,
+                                                )
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      const Padding(
+                                          padding: EdgeInsets.only(
+                                              top: 10.0, bottom: 10),
+                                          child: AutoSizeText(
+                                              'One of my fav music and musician . Started listening from my childhood . the name is AR Rahman. Show me your likes on hime through the likes ')),
+                                    ],
+                                  ),
+                                )),
+                          );
+                        }),
+                  ),
+                ],
+              ),
             ),
+          ),
+          const SearchPage(title: 'searchpage'),
+          const ActivityPage(title: 'activitypage'),
+          const Profile(title: 'homepage')
+        ]),
+        bottomNavigationBar: Container(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+          ),
+          child: TabBar(
+            controller: con,
+            indicatorColor: const Color.fromARGB(255, 146, 132, 0),
+            overlayColor: MaterialStateProperty.all(
+              Colors.white,
+            ),
+            labelStyle: const TextStyle(
+              fontSize: 0,
+            ),
+            labelColor: Colors.white,
+            unselectedLabelStyle: const TextStyle(
+              fontSize: 11,
+            ),
+            tabs: const [
+              Tab(
+                child: SizedBox(
+                    height: 25,
+                    width: 25,
+                    child: Image(
+                      image: AssetImage('assets/hut.png'),
+                      fit: BoxFit.fill,
+                    )),
+              ),
+              Tab(
+                  child: SizedBox(
+                height: 29,
+                width: 29,
+                child: Image(
+                  image: AssetImage('assets/search.png'),
+                  fit: BoxFit.fill,
+                ),
+              )),
+              Tab(
+                child: SizedBox(
+                    height: 31,
+                    width: 31,
+                    child: Image(
+                      image: AssetImage('assets/activity(1).png'),
+                      fit: BoxFit.fill,
+                    )),
+              ),
+              Tab(
+                child: SizedBox(
+                    height: 29,
+                    width: 29,
+                    child: Image(
+                      image: AssetImage('assets/profile.png'),
+                      fit: BoxFit.fill,
+                    )),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 }
-
-
