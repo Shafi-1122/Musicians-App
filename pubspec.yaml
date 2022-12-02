@@ -37,6 +37,8 @@ dependencies:
   provider: ^6.0.3
   persistent_bottom_nav_bar: ^4.0.2
   auto_size_text: ^3.0.0
+  assets_audio_player: ^3.0.6
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:
@@ -76,6 +78,8 @@ flutter:
       - assets/prof1.jpg
       - assets/camera2.png
       - assets/feed1.jpg
+      - assets/audio/rolexaudio.mp3
+      - assets/roleximage.jpg
       
 
 

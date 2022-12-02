@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:uiforlwearing/services/providers.dart';
+// import 'package:uiforlwearing/services/darkmodeprovider.dart';
+import 'package:uiforlwearing/services/providers/darkmodeprovider.dart';
 
 class ActivityPage extends StatefulWidget {
   const ActivityPage({Key? key, required this.title}) : super(key: key);
@@ -20,8 +21,8 @@ class _MyHomePageState extends State<ActivityPage> {
       child: Scaffold(
         backgroundColor: thecolor,
         appBar: AppBar(
-          shadowColor: Colors.white,
-          backgroundColor: Colors.white,
+          shadowColor: thecolor,
+          backgroundColor: thecolor,
           title: const Text(
             "Activity",
             style: TextStyle(

@@ -4,9 +4,9 @@ class DarkModeMOdel extends ChangeNotifier {
   // bool darkmode=false;
   bool darkmodestatus = false;
   var color = Colors.white;
-  var mode = Icon(Icons.dark_mode);
+  var mode = const Icon(Icons.dark_mode);
   void toggleDarkmode() {
-    darkmodestatus != darkmodestatus;
+    darkmodestatus =!darkmodestatus ;
     if (darkmodestatus == true) {
       color = Colors.grey;
     } else {
@@ -16,11 +16,11 @@ class DarkModeMOdel extends ChangeNotifier {
   }
 
   void darkmodechangestatus() {
-    if (darkmodestatus == true) {
-      mode = Icon(Icons.light_mode);
+   if (darkmodestatus == true) {
+      mode = const Icon(Icons.light_mode);
     } else {
-      mode = Icon(Icons.dark_mode);
+      mode = const Icon(Icons.dark_mode);
     }
     notifyListeners();
   }
-}
+} 

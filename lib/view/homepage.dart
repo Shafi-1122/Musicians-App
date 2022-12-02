@@ -1,35 +1,50 @@
+import 'dart:html';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:uiforlwearing/model/storymodel.dart';
+import 'package:uiforlwearing/services/apiconnection.dart';
 
-import 'package:uiforlwearing/services/providers.dart';
+// import 'package:uiforlwearing/services/darkmodeprovider.dart';
+import 'package:uiforlwearing/services/providers/darkmodeprovider.dart';
+import 'package:uiforlwearing/services/providers/storydetailsprovider.dart';
 import 'package:uiforlwearing/view/profile.dart';
 
 import 'package:uiforlwearing/view/searchpage.dart';
+import 'package:uiforlwearing/view/stories.dart';
 
 import 'activitypage.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
-
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
+  
   @override
   Widget build(BuildContext context) {
+    final thecolor = Provider.of<DarkModeMOdel>(context).color;
+    var datafromapionview = Provider.of<StoryDetails>(context).datafromapi;
+    late String profileimage;
+
     var theicon = const Icon(Icons.thumb_up);
     final con = TabController(vsync: this, length: 4);
     return SafeArea(
       child: Scaffold(
+        backgroundColor: thecolor,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(bottom: 20.0),
           child: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () {
+          
+;            },
             backgroundColor: const Color.fromARGB(255, 243, 219, 1),
             child: const Icon(
               Icons.add,
@@ -66,120 +81,81 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                           TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
                     ),
                   ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 18.0),
-                      child: Row(
-                        children: [
-                          Stack(alignment: Alignment.bottomLeft, children: [
-                            Container(
-                              height: 160,
-                              width: 110,
-                              decoration: BoxDecoration(
-                                  image: const DecorationImage(
-                                      image: AssetImage('prof4.jpg'),
-                                      fit: BoxFit.cover),
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.green),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.all(12.0),
-                              child: Text(
-                                "Sushant",
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w300,
-                                    color: Colors.white),
-                              ),
-                            ),
-                          ]),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15.0),
-                            child: Stack(
-                                alignment: Alignment.bottomLeft,
-                                children: [
-                                  Container(
-                                    height: 160,
-                                    width: 110,
-                                    decoration: BoxDecoration(
-                                        image: const DecorationImage(
-                                            image: AssetImage('prof2.jpg'),
-                                            fit: BoxFit.cover),
-                                        borderRadius: BorderRadius.circular(20),
-                                        color: Colors.green),
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.all(12.0),
-                                    child: Text(
-                                      "Alia Bhatt",
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.white),
+                  Padding(
+                    padding: const EdgeInsets.only(top:5.0),
+                    child: Container(
+                      height: MediaQuery.of(context).size.height/6,
+                      child:   FutureBuilder<List<Welcome>>(
+                        future: datafromapionview,
+                        builder: (context, snapshot) {
+                         
+                          if(snapshot.hasData){
+                            
+                            return ListView.builder(
+                            
+                            scrollDirection: Axis.horizontal,
+                            itemCount: snapshot.data!.length,
+                            itemBuilder: (context, index) {
+                               profileimage=snapshot.data![index].profileImage.toString();
+                               if(snapshot.data![index].profileImage==null){
+                            profileimage='https://img.freepik.com/premium-vector/male-avatar-icon-unknown-anonymous-person-default-avatar-profile-icon-social-media-user-business-man-man-profile-silhouette-isolated-white-background-vector-illustration_735449-120.jpg?w=740';
+                          }
+                             
+                              return Padding(
+                                padding: const EdgeInsets.only(left:6,right: 6),
+                                child: 
+                                    GestureDetector(
+                                      onTap: (){
+                                        Provider.of<StoryDetails>(context,
+                                                listen: false)
+                                            .indexTaker(index);
+
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Storiespage(index)));
+                                      },
+                                      child: Container(
+                                        child: Stack(alignment: AlignmentDirectional.bottomStart,
+                                        children: [ Padding(
+                                                                  padding: const EdgeInsets.all(12.0),
+                                                                  child: Text(
+                                                                    '${snapshot.data![index].name}',
+                                                                    maxLines: 1,
+                                                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w300,
+                                      color: Colors.white),
+                                                                  ),
+                                                                ),],),
+                                      height: 160,
+                                      width: 110,
+                                      decoration: BoxDecoration(
+                                          image:  DecorationImage(
+                                              image: NetworkImage(profileimage),
+                                              fit: BoxFit.cover),
+                                          borderRadius: BorderRadius.circular(20),
+                                          color: Colors.green),
+                                                                      ),
                                     ),
-                                  ),
-                                ]),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15.0),
-                            child: Stack(
-                                alignment: Alignment.bottomLeft,
-                                children: [
-                                  Container(
-                                    height: 160,
-                                    width: 110,
-                                    decoration: BoxDecoration(
-                                        image: const DecorationImage(
-                                            image: AssetImage('prof1.jpg'),
-                                            fit: BoxFit.cover),
-                                        borderRadius: BorderRadius.circular(20),
-                                        color: Colors.green),
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.all(12.0),
-                                    child: Text(
-                                      "Pooja",
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.white),
-                                    ),
-                                  ),
-                                ]),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15.0),
-                            child: Stack(children: [
-                              Stack(alignment: Alignment.bottomLeft, children: [
-                                Container(
-                                  height: 160,
-                                  width: 110,
-                                  decoration: BoxDecoration(
-                                      image: const DecorationImage(
-                                          image: AssetImage('prof2.jpg'),
-                                          fit: BoxFit.cover),
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Colors.green),
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.all(12.0),
-                                  child: Text(
-                                    "Sradha Kapoor",
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w300,
-                                        color: Colors.white),
-                                  ),
-                                ),
-                              ]),
-                            ]),
-                          ),
-                        ],
-                      ),
+                                    
+                                  
+                                );
+                              
+                            },
+                          );
+                          }
+                          else{
+                            return LinearProgressIndicator();
+                          }
+                        
+                      },
+                       
+                      )
+                        
                     ),
                   ),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(top: 12.0),
                     child: Text(
                       "Feed",
@@ -208,12 +184,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                 decoration: BoxDecoration(
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Colors.grey.shade300,
+                                        color: thecolor,
                                         blurRadius: 20.0,
                                         spreadRadius: 2.0,
                                       ),
                                     ],
-                                    color: Colors.white,
+                                    color: thecolor,
                                     borderRadius: const BorderRadius.all(
                                         Radius.circular(18))),
                                 child: Padding(
@@ -279,8 +255,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           const Profile(title: 'homepage')
         ]),
         bottomNavigationBar: Container(
-          decoration: const BoxDecoration(
-            color: Colors.white,
+          decoration: BoxDecoration(
+            color: thecolor,
           ),
           child: TabBar(
             controller: con,

@@ -2,7 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:uiforlwearing/services/providers.dart';
+// import 'package:uiforlwearing/services/darkmodeprovider.dart';
+import 'package:uiforlwearing/services/providers/darkmodeprovider.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key, required this.title}) : super(key: key);

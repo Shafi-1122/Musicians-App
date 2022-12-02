@@ -3,8 +3,11 @@
 import 'dart:math';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
+import 'package:uiforlwearing/services/providers/darkmodeprovider.dart';
+import 'package:uiforlwearing/services/providers/storydetailsprovider.dart';
+import 'package:uiforlwearing/services/providers/userdetailsprovider.dart';
 
-import 'package:uiforlwearing/services/providers.dart';
+// import 'package:uiforlwearing/services/darkmodeprovider.dart';
 import 'package:uiforlwearing/view/homepage.dart';
 
 import 'view/activitypage.dart';
@@ -22,14 +25,25 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
+    return MultiProvider(providers: [ChangeNotifierProvider(
         create: ((context) => DarkModeMOdel()),
-        child: MaterialApp(
+       ),
+            ChangeNotifierProvider(
+        create: ((context) => BioModel()),
+       ),  ChangeNotifierProvider(
+        create: ((context) => StoryDetails()),
+       ),
+
+            ],
+            child: MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
             theme: ThemeData(
               primarySwatch: Colors.blue,
             ),
-            home: const MyHomePage(title: "null")));
+            home:  MyHomePage(title: "null"))
+            )
+    ;
   }
 }
+ 

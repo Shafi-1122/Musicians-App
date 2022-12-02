@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:uiforlwearing/services/providers/darkmodeprovider.dart';
+import 'package:uiforlwearing/services/providers/storydetailsprovider.dart';
+import 'package:uiforlwearing/services/providers/userdetailsprovider.dart';
 
-import 'package:uiforlwearing/services/providers.dart';
+// import 'package:uiforlwearing/services/darkmodeprovider.dart';
+import 'package:uiforlwearing/view/editprofile.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key, required this.title}) : super(key: key);
@@ -16,6 +20,8 @@ class _MyHomePageState extends State<Profile> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     var thecolor = Provider.of<DarkModeMOdel>(context).color;
+    String theusername=Provider.of<BioModel>(context).username;
+    String thebio=Provider.of<BioModel>(context).bio;
     TabController tabController = TabController(length: 2, vsync: this);
     return SafeArea(
       child: Scaffold(
@@ -77,8 +83,8 @@ class _MyHomePageState extends State<Profile> with TickerProviderStateMixin {
                       child: Row(
                         children: [
                           Column(
-                            children: const [
-                              Text("Thomas Jake",
+                            children:  [
+                              Text(theusername,
                                   style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold)),
@@ -94,7 +100,7 @@ class _MyHomePageState extends State<Profile> with TickerProviderStateMixin {
                           const Spacer(),
                           ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                primary: Colors.white,
+                                backgroundColor: thecolor,
                                 side: const BorderSide(
                                   width: 2.0,
                                   color: Colors.black,
@@ -105,7 +111,9 @@ class _MyHomePageState extends State<Profile> with TickerProviderStateMixin {
                               //   // backgroundColor:
                               //   //     MaterialStateProperty.all(Colors.transparent),
                               // ),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(context,  MaterialPageRoute(builder: (context) => Editscreen()),);
+                              },
                               child: const Center(
                                 child: Text(
                                   'Edit profile',
@@ -147,8 +155,8 @@ class _MyHomePageState extends State<Profile> with TickerProviderStateMixin {
                   color: Colors.black,
                   thickness: 1,
                 ),
-                const Text(
-                  "All Speaker who wants to get paid please follow me for follow back.bullet lover",
+                 Text(
+                 thebio ,
                   style: TextStyle(fontSize: 10),
                 ),
                 Padding(
